@@ -1,0 +1,54 @@
+# For more info on HTTP files go to https://aka.ms/vs/httpfile
+@Questions.API_HostAddress = http://localhost:5146
+
+
+
+GET {{Questions.API_HostAddress}}/forQuiz
+Content-Type: application/json
+
+{
+  "ids": []
+}
+###
+GET {{Questions.API_HostAddress}}/category
+Content-Type: application/json
+
+{
+  "category": "Sports",
+  "amount": 10
+}
+###
+GET {{Questions.API_HostAddress}}/difficulty
+Content-Type: application/json
+
+{
+  "difficulty": "Easy",
+  "amount": 10
+}
+
+### Kör denna för att seeda databasen, kör den flera gånger för flera frågor ###
+POST {{Questions.API_HostAddress}}/seed
+Content-Type: application/json
+
+{}
+
+###
+POST {{Questions.API_HostAddress}}/
+Accept: application/json
+Content-Type: application/json
+
+{
+  "type": "multiple",
+  "difficulty": "easy",
+  "category": "Programming",
+  "questionText": "What is a variable?",
+  "correctAnswer": "A container for data",
+  "incorrectAnswers": [
+    "An object.", 
+    "A function.",
+    "A class."
+  ]
+}
+###
+
+GET {{Questions.API_HostAddress}}/

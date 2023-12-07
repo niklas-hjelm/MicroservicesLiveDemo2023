@@ -1,4 +1,5 @@
-﻿using MongoDB.Bson;
+﻿using Domain.Common.Enums;
+using MongoDB.Bson;
 using MongoDB.Driver;
 
 namespace Questions.DataAccess;
@@ -54,5 +55,39 @@ public class QuestionRepository : IQuestionRepository
         var questionsWithCategory = await _collection.Find(filter).ToListAsync(cancellationToken);
         var skip = rnd.Next(questionsWithCategory.Count - count);
         return questionsWithCategory.Skip(skip).Take(count);
+    }
+
+    public async Task<IEnumerable<Question>> GetQuestionsForDifficultyAsync(Difficulty difficulty, int count, CancellationToken cancellationToken)
+    {
+        var rnd = new Random();
+        var filter = Builders<Question>.Filter.Eq("Difficulty", difficulty.ToString());
+        var questionsWithDifficulty = await _collection.Find(filter).ToListAsync(cancellationToken);
+        var skip = rnd.Next(questionsWithDifficulty.Count - count);
+        return questionsWithDifficulty.Skip(skip).Take(count);
+    }
+
+    public async Task<IEnumerable<Question>> GetQuestionsForQuizAsync(IEnumerable<string> ids, CancellationToken cancellationToken)
+    {
+        var filter = Builders<Question>.Filter.In("_id", ids.Select(ObjectId.Parse));
+        return await _collection.Find(filter).ToListAsync(cancellationToken);
+    }
+
+    public async Task AddMultipleAsync(IEnumerable<Question> questions, CancellationToken cancellationToken)
+    {
+        var bulkOps = new List<WriteModel<Question>>();
+        foreach (var question in questions)
+        {
+            var filter = Builders<Question>.Filter.Eq(doc => doc.QuestionText, question.QuestionText);
+            var update = Builders<Question>.Update.SetOnInsert(doc => doc.QuestionText, question.QuestionText)
+                .SetOnInsert(doc => doc.Category, question.Category)
+                .SetOnInsert(doc => doc.CorrectAnswer, question.CorrectAnswer)
+                .SetOnInsert(doc => doc.Difficulty, question.Difficulty)
+                .SetOnInsert(doc => doc.IncorrectAnswers, question.IncorrectAnswers)
+                .SetOnInsert(doc => doc.Type, question.Type);
+            var upsertOne = new UpdateOneModel<Question>(filter, update) { IsUpsert = true };
+
+            bulkOps.Add(upsertOne);
+        }
+        await _collection.BulkWriteAsync(bulkOps, cancellationToken: cancellationToken);
     }
 }

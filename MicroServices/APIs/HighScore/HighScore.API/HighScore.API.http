@@ -1,0 +1,18 @@
+@HighScore.API_HostAddress = http://localhost:5261
+
+GET {{HighScore.API_HostAddress}}/
+
+### Fyll på med en Guid för en spelare
+GET {{HighScore.API_HostAddress}}/{00000000-0000-0000-0000-000000000000}
+
+### 
+GET {{HighScore.API_HostAddress}}/top-five
+
+###
+POST {{HighScore.API_HostAddress}}/
+Content-Type: application/json
+
+{
+    "PlayerId": "00000000-0000-0000-0000-000000000000",
+    "Score": 100
+}

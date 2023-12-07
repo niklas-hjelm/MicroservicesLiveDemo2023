@@ -1,0 +1,35 @@
+@Quiz.API_HostAddress = http://localhost:5111
+
+GET {{Quiz.API_HostAddress}}/
+Accept: application/json
+
+###
+POST {{Quiz.API_HostAddress}}/add-new-quiz
+Content-Type: application/json
+
+{
+  "NewQuiz":{
+      "name": "Quiz 1",
+      "description": "Quiz 1 description",
+      "author": "Author 1",
+      "createdAt": "2021-01-01T00:00:00.000Z",
+      "categories": [
+         "Category 1",
+         "Category 2",
+         "Category 3"
+      ],
+      "questions": [
+         "Question 1",
+         "Question 2",
+         "Question 3"
+      ]
+  }
+}
+
+###
+DELETE {{Quiz.API_HostAddress}}/delete-quiz
+Content-Type: application/json
+
+{
+  "QuizId": "65673706db2d9b62e2aff057"
+}

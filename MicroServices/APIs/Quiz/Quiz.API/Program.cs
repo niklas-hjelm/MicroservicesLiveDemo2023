@@ -1,20 +1,22 @@
 using FastEndpoints;
-using Questions.DataAccess;
+using Quiz.DataAccess;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Register Services
+// Add services to the container.
+
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddFastEndpoints();
-builder.Services.AddScoped<IQuestionRepository, QuestionRepository>();
+builder.Services.AddScoped<IQuizRepository, QuizRepository>();
 
 var app = builder.Build();
 
-// Middleware pipeline
+// Configure the HTTP request pipeline.
+if (app.Environment.IsDevelopment())
+{
+}
 
 app.UseHttpsRedirection();
 app.UseRouting();
-
 app.UseFastEndpoints();
-
 app.Run();
