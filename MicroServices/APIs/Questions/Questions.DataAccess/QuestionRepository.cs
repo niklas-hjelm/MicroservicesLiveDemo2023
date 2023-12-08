@@ -10,8 +10,8 @@ public class QuestionRepository : IQuestionRepository
 
     public QuestionRepository()
     {
-        var hostname = "localhost";
-        var databaseName = "QuestionDb";
+        var hostname =  Environment.GetEnvironmentVariable("DB_HOST");
+        var databaseName = Environment.GetEnvironmentVariable("DB_DATABASE");
         var connectionString = $"mongodb://{hostname}:27017";
 
         var client = new MongoClient(connectionString);

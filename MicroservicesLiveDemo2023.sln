@@ -21,15 +21,17 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Questions.DataAccess", "Mic
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Quiz", "Quiz", "{2B6E6642-26D9-49AA-BB42-A7BFFCFD9467}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Quiz.API", "MicroServices\APIs\Quiz\Quiz.API\Quiz.API.csproj", "{83D78428-69E7-4BA1-B02E-E5B3BC57F27F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Quiz.API", "MicroServices\APIs\Quiz\Quiz.API\Quiz.API.csproj", "{83D78428-69E7-4BA1-B02E-E5B3BC57F27F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Quiz.DataAccess", "MicroServices\APIs\Quiz\Quiz.DataAccess\Quiz.DataAccess.csproj", "{3D9A6D89-A11F-4CD7-9D6F-3345199C56EB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Quiz.DataAccess", "MicroServices\APIs\Quiz\Quiz.DataAccess\Quiz.DataAccess.csproj", "{3D9A6D89-A11F-4CD7-9D6F-3345199C56EB}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "HighScore", "HighScore", "{74BE8F48-9E73-4632-8724-09B2E2C98A59}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HighScore.API", "MicroServices\APIs\HighScore\HighScore.API\HighScore.API.csproj", "{20FC32E2-E041-4C4F-B834-D9D521343CAF}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HighScore.DataAccess", "MicroServices\APIs\HighScore\HighScore.DataAccess\HighScore.DataAccess.csproj", "{B8C39DA0-D490-41EB-A14A-7FB71E4D384F}"
+EndProject
+Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{D6E71A96-F2CA-44CF-AA89-AD8BEDB037EA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -65,6 +67,10 @@ Global
 		{B8C39DA0-D490-41EB-A14A-7FB71E4D384F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B8C39DA0-D490-41EB-A14A-7FB71E4D384F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B8C39DA0-D490-41EB-A14A-7FB71E4D384F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D6E71A96-F2CA-44CF-AA89-AD8BEDB037EA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D6E71A96-F2CA-44CF-AA89-AD8BEDB037EA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D6E71A96-F2CA-44CF-AA89-AD8BEDB037EA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D6E71A96-F2CA-44CF-AA89-AD8BEDB037EA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

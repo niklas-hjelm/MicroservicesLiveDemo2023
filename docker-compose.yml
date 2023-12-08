@@ -1,0 +1,76 @@
+version: '3.4'
+
+networks:
+    highscore:
+    quiz:
+    questions:
+
+services:
+  highscore.api:
+    image: ${DOCKER_REGISTRY-}highscoreapi
+    build:
+      context: .
+      dockerfile: MicroServices/APIs/HighScore/HighScore.API/Dockerfile
+    networks:
+      - highscore
+    depends_on:
+      - highscore.db
+    environment:
+      - DB_HOST=highscore.db
+      - DB_DATABASE=HighScoreDB
+      - DB_USER=sa
+      - DB_MSSQL_SA_PASSWORD=Pwd123!!1
+
+  questions.api:
+    image: ${DOCKER_REGISTRY-}questionsapi
+    build:
+      context: .
+      dockerfile: MicroServices/APIs/Questions/Questions.API/Dockerfile
+    depends_on:
+      - questions.db
+    networks:
+      - questions
+    environment:
+      - DB_HOST=questions.db
+      - DB_DATABASE=QuestionsDB
+
+  quiz.api:
+    image: ${DOCKER_REGISTRY-}quizapi
+    build:
+      context: .
+      dockerfile: MicroServices/APIs/Quiz/Quiz.API/Dockerfile
+    depends_on:
+      - quiz.db
+    networks:
+      - quiz
+    environment:
+      - DB_HOST=quiz.db
+      - DB_DATABASE=QuizDB
+
+  highscore.db:
+    container_name: highscoredb
+    image: mcr.microsoft.com/mssql/server:2019-latest
+    networks:
+      - highscore
+    ports:
+        - "7000:1433"
+    environment:
+      - ACCEPT_EULA=Y
+      - SA_PASSWORD=Pwd123!!1
+      - MSSQL_PID=Developer
+
+  questions.db:
+    container_name: questionsdb
+    image: mongo:latest
+    networks:
+      - questions
+    ports:
+      - "7002:27017"
+
+  quiz.db:
+    container_name: quizdb
+    image: mongo:latest
+    networks:
+      - quiz
+    ports:
+      - "7001:27017"

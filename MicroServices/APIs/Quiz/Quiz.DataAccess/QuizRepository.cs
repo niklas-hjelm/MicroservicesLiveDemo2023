@@ -11,7 +11,7 @@ public class QuizRepository : IQuizRepository
     public QuizRepository()
     {
         var hostname = Environment.GetEnvironmentVariable("DB_HOST");
-        var databaseName = Environment.GetEnvironmentVariable("DB_NAME");
+        var databaseName = Environment.GetEnvironmentVariable("DB_DATABASE");
         var connectionString = $"mongodb://{hostname}:27017";
 
         var client = new MongoClient(connectionString);

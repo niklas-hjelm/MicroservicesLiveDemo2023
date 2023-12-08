@@ -4,7 +4,13 @@ using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
-var connectionString = builder.Configuration.GetConnectionString("HighScoreDb");
+
+var host = Environment.GetEnvironmentVariable("DB_HOST");
+var database = Environment.GetEnvironmentVariable("DB_DATABASE");
+var username = Environment.GetEnvironmentVariable("DB_USER");
+var password = Environment.GetEnvironmentVariable("DB_MSSQL_SA_PASSWORD");
+var connectionString =
+    $"Data Source={host};Initial Catalog={database};User ID={username};Password={password};Trusted_connection=False;TrustServerCertificate=True;";
 
 builder.Services.AddSqlServer<HighScoreContext>(connectionString);
 builder.Services.AddFastEndpoints();

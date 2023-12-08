@@ -1,4 +1,4 @@
-@HighScore.API_HostAddress = http://localhost:5261
+@HighScore.API_HostAddress = https://localhost:58965/
 
 GET {{HighScore.API_HostAddress}}/
 
