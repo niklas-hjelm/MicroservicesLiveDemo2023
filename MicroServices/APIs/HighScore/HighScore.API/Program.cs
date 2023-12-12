@@ -28,4 +28,3 @@ app.UseRouting();
 app.UseFastEndpoints();
 
 app.Run();
-

@@ -6,7 +6,8 @@
       "serviceActions": {
         "highscore.api": "StartDebugging",
         "questions.api": "StartDebugging",
-        "quiz.api": "StartDebugging"
+        "quiz.api": "StartDebugging",
+        "quizgateway": "StartDebugging"
       }
     }
   }
