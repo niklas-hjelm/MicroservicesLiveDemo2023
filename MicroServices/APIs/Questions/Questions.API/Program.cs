@@ -12,8 +12,6 @@ builder.Services.AddHttpClient("openTriviaDb", c => c.BaseAddress = new System.U
 var app = builder.Build();
 
 // Middleware pipeline
-
-app.UseHttpsRedirection();
 app.UseRouting();
 
 app.UseFastEndpoints();
