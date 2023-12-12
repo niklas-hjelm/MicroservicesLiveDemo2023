@@ -1,0 +1,34 @@
+﻿@using Domain.Common.DTOs
+@using System.Collections.ObjectModel
+@page "/questions"
+@inject IHttpClientFactory _http
+
+
+<h3>QuestionsView</h3>
+
+@foreach (var question in Questions)
+{
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title">@question.QuestionText</h5>
+            <p class="card-text">@question.Category</p>
+        </div>
+    </div>
+}
+
+@code {
+    public List<QuestionDto> Questions { get; set; } = new ();
+
+    protected override async Task OnInitializedAsync()
+    {
+        var client = _http.CreateClient("gateway");
+        var questions = await client.GetFromJsonAsync<QuestionsResponse>("questions");
+        Questions = questions.Questions;
+    }
+
+    class QuestionsResponse
+    {
+        public List<QuestionDto> Questions { get; set; } = new List<QuestionDto>();
+    }
+}
+

@@ -25,6 +25,18 @@
       "DownstreamPathTemplate": "/seed"
     },
     {
+      "UpstreamPathTemplate": "/questions",
+      "UpstreamHttpMethod": [ "Get" ],
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "questions.api",
+          "Port": 8080
+        }
+      ],
+      "DownstreamPathTemplate": "/"
+    },
+    {
       "UpstreamPathTemplate": "/highscore",
       "UpstreamHttpMethod": [ "Get", "Post" ],
       "DownstreamScheme": "http",
