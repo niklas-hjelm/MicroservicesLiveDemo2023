@@ -1,4 +1,8 @@
+using Domain.Common.RabbitMq;
 using FastEndpoints;
+using Quiz.API.BackgroundServices;
+using Quiz.API.Services;
+using Quiz.API.Services.Interfaces;
 using Quiz.DataAccess;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -8,6 +12,17 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddFastEndpoints();
 builder.Services.AddScoped<IQuizRepository, QuizRepository>();
+
+builder.Services.AddSingleton(sp => new RabbitMqConfiguration()
+{
+    HostName = "rabbitmq",
+    Username = "guest",
+    Password = "guest"
+});
+
+builder.Services.AddSingleton<IRabbitMqService, RabbitMqService>();
+builder.Services.AddSingleton<IMessageConsumerService, MessageConsumerService>();
+builder.Services.AddHostedService<MessageConsumerHostedService>();
 
 var app = builder.Build();
 

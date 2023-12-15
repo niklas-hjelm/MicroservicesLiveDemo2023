@@ -1,10 +1,11 @@
 ﻿using Domain.Common.DTOs;
+using Domain.Common.RabbitMq;
 using FastEndpoints;
 using Questions.DataAccess;
 
 namespace Questions.API.Endpoints.GetAll;
 
-public class GetAllEndpoint(IQuestionRepository repository) : Endpoint<GetAllRequest, GetAllResponse>
+public class GetAllEndpoint(IQuestionRepository repository, IMessageProducerService messageProducer) : Endpoint<GetAllRequest, GetAllResponse>
 {
     public override void Configure()
     {
@@ -14,6 +15,8 @@ public class GetAllEndpoint(IQuestionRepository repository) : Endpoint<GetAllReq
 
     public override async Task HandleAsync(GetAllRequest req, CancellationToken ct)
     {
+        await messageProducer.SendMessageAsync("God Jul!");
+
         var allQuestions = await repository.GetAllAsync();
         var questionDtos = 
             allQuestions.
